@@ -1,5 +1,49 @@
 #!/bin/bash
 
+# Function to detect OS and open required ports
+enable_ports() {
+    # List of required ports to open
+    ports=(22 10001 20001 8545)
+
+    # Check for Linux (Debian/Ubuntu or CentOS/RHEL)
+    if [[ "$OSTYPE" == "linux-gnu"* ]]; then
+        if command -v ufw &> /dev/null; then
+            echo "Detected Debian/Ubuntu. Enabling ports using ufw..."
+            sudo ufw allow ssh
+            for port in "${ports[@]}"; do
+                sudo ufw allow "$port"
+            done
+            sudo ufw reload
+            echo "Ports enabled successfully on Debian/Ubuntu."
+        elif command -v firewall-cmd &> /dev/null; then
+            echo "Detected CentOS/RHEL. Enabling ports using firewall-cmd..."
+            sudo firewall-cmd --permanent --add-service=ssh
+            for port in "${ports[@]}"; do
+                sudo firewall-cmd --permanent --add-port="${port}/tcp"
+            done
+            sudo firewall-cmd --reload
+            echo "Ports enabled successfully on CentOS/RHEL."
+        else
+            echo "Firewall management tool not detected. Please enable ports manually."
+        fi
+    # Check for macOS
+    elif [[ "$OSTYPE" == "darwin"* ]]; then
+        echo "Detected macOS. Enabling ports using pfctl (macOS firewall)..."
+        echo "block in all" | sudo pfctl -ef -
+        for port in "${ports[@]}"; do
+            echo "pass in proto tcp from any to any port ${port}" | sudo pfctl -ef -
+        done
+        sudo pfctl -f /etc/pf.conf
+        sudo pfctl -e
+        echo "Ports enabled successfully on macOS."
+    else
+        echo "Unsupported OS. Please enable ports manually."
+    fi
+}
+
+# Enable ports before starting nodes
+enable_ports
+
 # Check if node number is provided
 if [ "$1" == "daemon" ] && [ -n "$3" ]; then
     node_num="$3"

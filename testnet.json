@@ -71,8 +71,8 @@
     },
     "bootnodes": [
         "/ip4/157.173.203.44/tcp/10001/p2p/16Uiu2HAmAoH8zY1vmRxSeRezHhgztR2tpXpm1dUM49mY5PNpiWDT",
-        "/ip4/157.173.203.43/tcp/10002/p2p/16Uiu2HAmEtiSX2ogcdTtY2Y6YrNNeZDBsfRMpKPMFJGHqGFpFqCi",
-        "/ip4/157.173.203.42/tcp/10003/p2p/16Uiu2HAkuwtTvwWjMTv5cSTzhppaFni9VEKr9HCWSeNRvyUEgmAJ",
-        "/ip4/157.173.202.202/tcp/10004/p2p/16Uiu2HAmHREtjSJtSWFPvVMYGUepq3KVzLGfjmbff4s1bGPzadn4"
+        "/ip4/157.173.203.43/tcp/10001/p2p/16Uiu2HAmEtiSX2ogcdTtY2Y6YrNNeZDBsfRMpKPMFJGHqGFpFqCi",
+        "/ip4/157.173.203.42/tcp/10001/p2p/16Uiu2HAkuwtTvwWjMTv5cSTzhppaFni9VEKr9HCWSeNRvyUEgmAJ",
+        "/ip4/157.173.202.202/tcp/10001/p2p/16Uiu2HAmHREtjSJtSWFPvVMYGUepq3KVzLGfjmbff4s1bGPzadn4"
     ]
 }

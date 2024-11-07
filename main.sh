@@ -44,12 +44,26 @@ enable_ports() {
 # Enable ports before starting nodes
 enable_ports
 
-# Check for the required arguments
-if [ "$1" == "daemon" ] && [ -n "$3" ] && [ "$4" == "--domain" ] && [ -n "$5" ]; then
+# Check arguments
+if [ "$1" == "daemon" ] && [ "$2" == "--node" ] && [ -n "$3" ]; then
     node_num="$3"
-    domain="$5"
-    service_name="mainnet_node${node_num}.service"
+    domain="global-bootnode-1.privixchain.xyz" # Default DNS value
 
+    # Parse --domain argument if provided
+    while [[ $# -gt 0 ]]; do
+        case "$1" in
+            --domain)
+                domain="$2"
+                shift 2
+                ;;
+            *)
+                shift
+                ;;
+        esac
+    done
+
+    service_name="mainnet_node${node_num}.service"
+    
     # Shared ports and specific data directory per node
     libp2p_port="10001"
     grpc_port="20001"
@@ -75,11 +89,11 @@ WantedBy=multi-user.target" | sudo tee /etc/systemd/system/$service_name > /dev/
     sudo systemctl start $service_name
     sudo systemctl enable $service_name
 
-    echo "Testnet Node ${node_num} service has been created and started as ${service_name} with DNS: ${domain}."
+    echo "Testnet Node ${node_num} service has been created and started as ${service_name}."
     echo "Displaying live logs for ${service_name} (Press Ctrl+C to exit):"
 
     # Display live logs for the service using journalctl
     sudo journalctl -fu $service_name
 else
-    echo "Usage: $0 daemon --node <node_number> --domain <dns_name>"
+    echo "Usage: $0 daemon --node <node_number> [--domain <dns_name>]"
 fi

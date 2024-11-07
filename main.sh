@@ -44,26 +44,35 @@ enable_ports() {
 # Enable ports before starting nodes
 enable_ports
 
-# Check arguments
-if [ "$1" == "daemon" ] && [ "$2" == "--node" ] && [ -n "$3" ]; then
-    node_num="$3"
-    domain="global-bootnode-1.privixchain.xyz" # Default DNS value
+# Default DNS value
+domain="global-bootnode-1.privixchain.xyz"
+node_num=""
 
-    # Parse --domain argument if provided
-    while [[ $# -gt 0 ]]; do
-        case "$1" in
-            --domain)
-                domain="$2"
-                shift 2
-                ;;
-            *)
-                shift
-                ;;
-        esac
-    done
+# Parse arguments
+while [[ $# -gt 0 ]]; do
+    case "$1" in
+        --domain)
+            domain="$2"
+            shift 2
+            ;;
+        --node)
+            node_num="$2"
+            shift 2
+            ;;
+        daemon)
+            shift
+            ;;
+        *)
+            echo "Unknown option $1"
+            exit 1
+            ;;
+    esac
+done
 
+# Check if node number is provided
+if [ -n "$node_num" ]; then
     service_name="mainnet_node${node_num}.service"
-    
+
     # Shared ports and specific data directory per node
     libp2p_port="10001"
     grpc_port="20001"

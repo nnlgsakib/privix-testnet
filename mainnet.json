@@ -67,9 +67,9 @@
         "baseFeeEM": "0x0"
     },
     "bootnodes": [
-    "/dns4/global-bootnode-1.privixchain.xyz/p2p/16Uiu2HAmAoH8zY1vmRxSeRezHhgztR2tpXpm1dUM49mY5PNpiWDT",
-    "/dns4/global-bootnode-2.privixchain.xyz/p2p/16Uiu2HAmEtiSX2ogcdTtY2Y6YrNNeZDBsfRMpKPMFJGHqGFpFqCi",
-    "/dns4/global-bootnode-3.privixchain.xyz/p2p/16Uiu2HAkuwtTvwWjMTv5cSTzhppaFni9VEKr9HCWSeNRvyUEgmAJ",
-    "/dns4/global-bootnode-4.privixchain.xyz/p2p/16Uiu2HAmHREtjSJtSWFPvVMYGUepq3KVzLGfjmbff4s1bGPzadn4"
-    ]
+        "/dns4/global-bootnode-1.privixchain.xyz/tcp/10001/p2p/16Uiu2HAmAoH8zY1vmRxSeRezHhgztR2tpXpm1dUM49mY5PNpiWDT",
+        "/dns4/global-bootnode-2.privixchain.xyz/tcp/10001/p2p/16Uiu2HAmEtiSX2ogcdTtY2Y6YrNNeZDBsfRMpKPMFJGHqGFpFqCi",
+        "/dns4/global-bootnode-3.privixchain.xyz/tcp/10001/p2p/16Uiu2HAkuwtTvwWjMTv5cSTzhppaFni9VEKr9HCWSeNRvyUEgmAJ",
+        "/dns4/global-bootnode-4.privixchain.xyz/tcp/10001/p2p/16Uiu2HAmHREtjSJtSWFPvVMYGUepq3KVzLGfjmbff4s1bGPzadn4"
+        ]
 }
